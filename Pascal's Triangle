@@ -1,0 +1,34 @@
+class Solution {
+    void solve(int numRows, int i, vector<int>prevRes, vector<vector<int>> &ans){
+        if(i>numRows){
+            return ;
+        }
+        vector<int> res(i);
+        res[0]=1;
+        res[i-1]=1;
+        for(int j=1; j<i-1; j++){
+            res[j]=prevRes[j-1]+prevRes[j];
+        }
+
+        ans.push_back(res);
+        // prevRes=res;
+        solve(numRows, i+1, res, ans);
+    }
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> ans;
+        if(numRows==0){
+            return ans;
+        }
+        vector<int>res;
+        res.push_back(1);
+        ans.push_back(res);
+    
+        if(numRows>=2){
+            vector<int>res1(2,1);
+            ans.push_back(res1);
+            solve(numRows, 3, res1, ans);
+        }
+        return ans;
+    }
+};
