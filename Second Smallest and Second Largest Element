@@ -1,0 +1,31 @@
+vector<int> getSecondOrderElements(int n, vector<int> a) {
+    vector<int> ans;
+    int maxi=INT_MIN;
+    int mini=INT_MAX;
+    int posSmall=-1;
+    int posLar=-1;
+    for(int i=0; i<n; i++){
+        if(a[i]>maxi){
+            posLar=i;
+        }
+        maxi=max(maxi, a[i]);
+        if(a[i]<mini){
+            posSmall=i;
+        }
+        mini=min(mini, a[i]);
+    }
+    a[posLar]=INT_MIN;
+    maxi=INT_MIN;
+    for(int i=0; i<n; i++){
+        maxi=max(maxi, a[i]);
+    }
+    ans.push_back(maxi);
+    a[posLar]=INT_MAX;
+    a[posSmall]=INT_MAX;
+    mini=INT_MAX;
+    for(int i=0; i<n; i++){
+        mini=min(mini, a[i]);
+    }
+    ans.push_back(mini);
+    return ans;
+}
